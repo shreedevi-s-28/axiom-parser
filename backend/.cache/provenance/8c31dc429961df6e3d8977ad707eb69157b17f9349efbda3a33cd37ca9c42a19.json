@@ -1,0 +1,223 @@
+{
+  "document_id": "doc_424e83c1",
+  "filename": "filing.pdf",
+  "file_type": "application/pdf",
+  "page_count": 2,
+  "metrics": {
+    "processing_time_ms": 0.28,
+    "estimated_cost_usd": 0.0013,
+    "confidence_average": 0.916,
+    "total_pages": 2,
+    "total_blocks": 7
+  },
+  "blocks": [
+    {
+      "id": "blk_001",
+      "page": 1,
+      "type": "heading",
+      "text": "ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 50.0,
+        "x1": 920.0,
+        "y1": 85.0
+      },
+      "confidence": 0.99,
+      "reading_order": 1,
+      "level": 1,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_002",
+      "page": 1,
+      "type": "paragraph",
+      "text": "The following review reflects our consolidated debt obligations, capital structure maturities, and liquidity framework as of December 31, 2025.",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 95.0,
+        "x1": 480.0,
+        "y1": 160.0
+      },
+      "confidence": 0.98,
+      "reading_order": 2,
+      "level": null,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_003",
+      "page": 1,
+      "type": "paragraph",
+      "text": "Borrowing capacity under our revolving credit facility remains subject to customary leverage ratios and compliance covenants detailed herein.",
+      "bbox": {
+        "x0": 500.0,
+        "y0": 95.0,
+        "x1": 920.0,
+        "y1": 160.0
+      },
+      "confidence": 0.97,
+      "reading_order": 3,
+      "level": null,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_004",
+      "page": 1,
+      "type": "table",
+      "text": "Consolidated Debt Schedule",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 180.0,
+        "x1": 920.0,
+        "y1": 420.0
+      },
+      "confidence": 0.96,
+      "reading_order": 4,
+      "level": null,
+      "table_data": {
+        "headers": [
+          "Facility / Tranche",
+          "Principal ($M)",
+          "Interest Rate",
+          "Maturity"
+        ],
+        "rows": [
+          [
+            "Revolving Credit Facility",
+            "250.0",
+            "SOFR + 1.75%",
+            "June 2028"
+          ],
+          [
+            "Term Loan B (First Lien)",
+            "620.0",
+            "SOFR + 2.50%",
+            "September 2030"
+          ],
+          [
+            "Senior Secured Notes",
+            "400.0",
+            "5.875% Fixed",
+            "January 2032"
+          ],
+          [
+            "Subordinated Notes",
+            "150.0",
+            "7.250% Fixed",
+            "March 2033"
+          ]
+        ],
+        "cells": [],
+        "is_multi_page": true,
+        "continued_pages": [
+          1,
+          2
+        ]
+      },
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_005",
+      "page": 2,
+      "type": "figure",
+      "text": "**Figure: Consolidated EBITDA Trajectory ($M)**\n\n| Fiscal Year | EBITDA |\n| --- | --- |\n| 2021 | 45.2 |\n| 2022 | 68.4 |\n| 2023 | 110.1 |\n| 2024 (E) | 148.5 |",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 450.0,
+        "x1": 920.0,
+        "y1": 720.0
+      },
+      "confidence": 0.94,
+      "reading_order": 5,
+      "level": null,
+      "table_data": null,
+      "chart_data": {
+        "chart_type": "bar_chart",
+        "title": "Consolidated EBITDA Trajectory ($M)",
+        "x_label": "Fiscal Year",
+        "y_label": "Adjusted EBITDA ($M)",
+        "series": [
+          {
+            "name": "EBITDA",
+            "data": [
+              {
+                "x": "2021",
+                "y": 45.2
+              },
+              {
+                "x": "2022",
+                "y": 68.4
+              },
+              {
+                "x": "2023",
+                "y": 110.1
+              },
+              {
+                "x": "2024 (E)",
+                "y": 148.5
+              }
+            ]
+          }
+        ]
+      },
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_006",
+      "page": 2,
+      "type": "equation",
+      "text": "Leverage Ratio = (Total Funded Debt - Unrestricted Cash) / LTM Adjusted EBITDA",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 740.0,
+        "x1": 920.0,
+        "y1": 800.0
+      },
+      "confidence": 0.99,
+      "reading_order": 6,
+      "level": null,
+      "table_data": null,
+      "chart_data": null,
+      "latex": "\\text{Leverage Ratio} = \\frac{\\text{Total Funded Debt} - \\text{Unrestricted Cash}}{\\text{LTM Adjusted EBITDA}}",
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_007",
+      "page": 2,
+      "type": "paragraph",
+      "text": "* Note 4: Excludes $12.5M deferred financing costs amortized over facility tenure.",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 850.0,
+        "x1": 920.0,
+        "y1": 900.0
+      },
+      "confidence": 0.58,
+      "reading_order": 7,
+      "level": null,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": true,
+      "review_reason": "Degraded ink contrast: OCR confidence below 0.70 threshold"
+    }
+  ],
+  "markdown": "# ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION\n\nThe following review reflects our consolidated debt obligations, capital structure maturities, and liquidity framework as of December 31, 2025.\n\nBorrowing capacity under our revolving credit facility remains subject to customary leverage ratios and compliance covenants detailed herein.\n\n| Facility / Tranche | Principal ($M) | Interest Rate | Maturity |\n| --- | --- | --- | --- |\n| Revolving Credit Facility | 250.0 | SOFR + 1.75% | June 2028 |\n| Term Loan B (First Lien) | 620.0 | SOFR + 2.50% | September 2030 |\n| Senior Secured Notes | 400.0 | 5.875% Fixed | January 2032 |\n| Subordinated Notes | 150.0 | 7.250% Fixed | March 2033 |\n\n\n**Figure: Consolidated EBITDA Trajectory ($M)**\n\n| Fiscal Year | EBITDA |\n| --- | --- |\n| 2021 | 45.2 |\n| 2022 | 68.4 |\n| 2023 | 110.1 |\n| 2024 (E) | 148.5 |\n\n$$\n\\text{Leverage Ratio} = \\frac{\\text{Total Funded Debt} - \\text{Unrestricted Cash}}{\\text{LTM Adjusted EBITDA}}\n$$\n\n* Note 4: Excludes $12.5M deferred financing costs amortized over facility tenure.\n"
+}

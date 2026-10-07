@@ -1,18 +1,17 @@
 # backend/app/main.py
-import json
 import os
 import sys
 
 from fastapi import FastAPI, UploadFile, File, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 
-# Add parent path so imports work cleanly
+# Ensure python can locate backend packages cleanly
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from app.schemas.document import ParseResult
 from app.schemas.errors import RFC7807ProblemDetails
 from app.core.watchdog import enforce_timeout
+from app.pipeline import UniversalIngestionPipeline
 
 # 1. Initialize FastAPI app
 app = FastAPI(
@@ -30,7 +29,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 3. Health Check
+# 3. Instantiate the pipeline once
+pipeline = UniversalIngestionPipeline()
+
+# 4. Health Check Endpoint
 @app.get("/api/v1/health")
 def health_check():
     return {
@@ -40,8 +42,7 @@ def health_check():
         "sla_timeout_limit_seconds": 45.0
     }
 
-# 4. Core Parsing Route protected by the Watchdog Timer
-# 4. Core Parsing Route protected by the Watchdog Timer
+# 5. Core Parsing Route protected by the Watchdog Timer
 @app.post("/api/v1/parse", response_model=ParseResult)
 @enforce_timeout(timeout_seconds=45.0)
 async def parse_document(file: UploadFile = File(...)):
@@ -89,25 +90,7 @@ async def parse_document(file: UploadFile = File(...)):
         )
         raise HTTPException(status_code=422, detail=problem.model_dump())
 
-    # Serve the frozen mock contract data while Person 2 & Person 3 wire their extractors
-    contract_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "contracts", "mock_result.json"))
-    
-    if not os.path.exists(contract_path):
-        problem = RFC7807ProblemDetails(
-            type="https://errors.axiomparse.dev/INTERNAL_CONTRACT_ERROR",
-            title="Contract Fixture Missing",
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal contract fixture mock_result.json not found.",
-            instance="/api/v1/parse",
-            error_code="ERR_FIXTURE_NOT_FOUND"
-        )
-        raise HTTPException(status_code=500, detail=problem.model_dump())
-
-    with open(contract_path, "r") as f:
-        response_data = json.load(f)
-
-    # Reflect dynamic uploaded filename
-    response_data["filename"] = file.filename
-    response_data["file_type"] = file.content_type or "application/pdf"
-
-    return response_data
+    # 4.2: Execute the 3-Stage Pipeline
+    mime = file.content_type or "application/pdf"
+    result = await pipeline.execute(file.filename, contents, mime)
+    return result
