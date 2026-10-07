@@ -1,6 +1,12 @@
 # backend/app/ingest/adapters.py
 import io
 import csv
+import os
+import sys
+
+# Ensure Python can resolve 'app' from the backend directory
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 from typing import List
 from openpyxl import load_workbook
 from pptx import Presentation
