@@ -1,0 +1,79 @@
+{
+  "document_id": "doc_mock_123",
+  "filename": "sample_filing.pdf",
+  "file_type": "application/pdf",
+  "page_count": 1,
+  "metrics": {
+    "processing_time_ms": 840.0,
+    "estimated_cost_usd": 0.00065,
+    "confidence_average": 0.97,
+    "total_pages": 1,
+    "total_blocks": 2
+  },
+  "blocks": [
+    {
+      "id": "blk_001",
+      "page": 1,
+      "type": "heading",
+      "text": "Executive Financial Summary",
+      "bbox": {
+        "x0": 50.0,
+        "y0": 50.0,
+        "x1": 900.0,
+        "y1": 90.0
+      },
+      "confidence": 0.99,
+      "reading_order": 1,
+      "level": 1,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_002",
+      "page": 1,
+      "type": "table",
+      "text": "Debt Structure Summary",
+      "bbox": {
+        "x0": 50.0,
+        "y0": 110.0,
+        "x1": 900.0,
+        "y1": 300.0
+      },
+      "confidence": 0.95,
+      "reading_order": 2,
+      "level": null,
+      "table_data": {
+        "headers": [
+          "Tranche",
+          "Principal ($M)",
+          "Rate"
+        ],
+        "rows": [
+          [
+            "Term Loan B",
+            "620.0",
+            "SOFR + 2.50%"
+          ],
+          [
+            "Senior Notes",
+            "400.0",
+            "5.875%"
+          ]
+        ],
+        "cells": [],
+        "is_multi_page": false,
+        "continued_pages": [
+          1
+        ]
+      },
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    }
+  ],
+  "markdown": "# Executive Financial Summary\n\n| Tranche | Principal ($M) | Rate |\n| --- | --- | --- |\n| Term Loan B | 620.0 | SOFR + 2.50% |\n| Senior Notes | 400.0 | 5.875% |"
+}
