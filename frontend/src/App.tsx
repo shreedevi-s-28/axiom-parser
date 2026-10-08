@@ -4,11 +4,14 @@ import { DocumentViewer } from './components/DocumentViewer';
 import { ExtractedBlockList } from './components/ExtractedBlockList';
 import { AuditQueue } from './components/AuditQueue';
 import { EconomicsHUD } from './components/EconomicsHUD';
+import { OutputPanel } from './components/OutputPanel';
+import type { OutputFormat } from './components/OutputPanel';
 import { ApiError, analyzeDocument, pageImageUrl } from './api/client';
 import { validatePdfFile } from './utils/file';
 import { needsReview } from './utils/coordinates';
 import type { DocumentResult } from './types/document';
 
+type View = 'document' | OutputFormat;
 type Phase = 'idle' | 'analyzing' | 'done' | 'error';
 
 interface DisplayError {
@@ -27,6 +30,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
   const [hoveredBlockId, setHoveredBlockId] = useState<string | null>(null);
+  const [view, setView] = useState<View>('document');
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -73,6 +77,7 @@ function App() {
     setSelectedBlockId(null);
     setHoveredBlockId(null);
     setCurrentPage(1);
+    setView('document');
   };
 
   const handleAnalyze = async () => {
@@ -95,12 +100,14 @@ function App() {
     setSelectedBlockId(null);
     setHoveredBlockId(null);
     setCurrentPage(1);
+    setView('document');
 
     try {
       const analysis = await analyzeDocument(file, controller.signal);
       if (abortRef.current !== controller) return;
       setResult(analysis);
       setPhase('done');
+      setView('markdown');
     } catch (caught) {
       if (abortRef.current !== controller) return;
       if (caught instanceof DOMException && caught.name === 'AbortError') return;
@@ -295,23 +302,56 @@ function App() {
 
 
         {/* CENTER — DOCUMENT */}
-        <main className="flex-1 min-w-0 min-h-0 bg-[#e9e5dd] overflow-hidden">
+        <main className="flex-1 min-w-0 min-h-0 bg-[#e9e5dd] overflow-hidden flex flex-col">
 
-          <DocumentViewer
-            filename={result?.filename ?? null}
-            pageNumber={currentPage}
-            pageCount={result?.page_count ?? 0}
-            pageSize={pageSize}
-            imageUrl={imageUrl}
-            emptyTitle={emptyState.title}
-            emptyBody={emptyState.body}
-            blocks={pageBlocks}
-            selectedBlockId={selectedBlockId}
-            hoveredBlockId={hoveredBlockId}
-            onSelectBlock={handleSelectBlock}
-            onHoverBlock={setHoveredBlockId}
-            onPageChange={handlePageChange}
+          {/* VIEW SWITCH */}
+          <div className="h-9 shrink-0 bg-stone-200 border-b border-stone-300 px-6 flex items-end gap-1">
+            {([
+              ['document', 'Document'],
+              ['markdown', 'Markdown'],
+              ['json', 'JSON'],
+            ] as const).map(([value, label]) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setView(value)}
+                className={`h-8 px-4 text-[10px] font-mono uppercase tracking-wider border-x border-t transition-colors ${
+                  view === value
+                    ? 'bg-[#f7f5f0] border-stone-300 text-slate-900'
+                    : 'bg-stone-200 border-transparent text-stone-500 hover:text-stone-800'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex-1 min-h-0">
+            {view === 'document' ? (
+              <DocumentViewer
+
+                filename={result?.filename ?? null}
+                pageNumber={currentPage}
+                pageCount={result?.page_count ?? 0}
+                pageSize={pageSize}
+                imageUrl={imageUrl}
+                emptyTitle={emptyState.title}
+                emptyBody={emptyState.body}
+                blocks={pageBlocks}
+                selectedBlockId={selectedBlockId}
+                hoveredBlockId={hoveredBlockId}
+                onSelectBlock={handleSelectBlock}
+                onHoverBlock={setHoveredBlockId}
+                onPageChange={handlePageChange}
           />
+            ) : (
+              <OutputPanel
+                result={result}
+                format={view}
+                onFormatChange={setView}
+              />
+            )}
+          </div>
 
         </main>
 

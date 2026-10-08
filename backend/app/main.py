@@ -35,10 +35,12 @@ app = FastAPI(
     description="Universal document parser for financial, legal, and regulated diligence."
 )
 
-# 2. CORS: only the configured frontend origins, only the methods the API uses.
+# 2. CORS: configured frontend origins, plus localhost on any port so the Vite dev
+# server still works when it falls back from 5173 to 5174, 5175, ...
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],

@@ -201,8 +201,6 @@ axiom-parser/
 
 ## Technology Stack
 
-## Technology Stack
-
 ### Frontend
 
 - React 19
@@ -211,6 +209,13 @@ axiom-parser/
 - Tailwind CSS 4
 - React DOM
 - ESLint
+
+### Backend
+
+- Python 3.11+
+- FastAPI + Uvicorn
+- PyMuPDF (PDF text and page rendering)
+- Pydantic
 
 ### Project Structure
 
@@ -344,7 +349,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`, choose **Select PDF**, then **Analyze**. Sample PDFs are in `demo_assets/` (for example `merger_filing_q3.pdf`).
+Open `http://localhost:5173`, choose **Select PDF**, then **Analyze**. When the analysis finishes, the **Markdown** and **JSON** tabs above the page view show the full output, each with **Copy** and **Download** buttons. Sample PDFs are in `demo_assets/` (for example `merger_filing_q3.pdf`).
 
 **API**
 
@@ -359,7 +364,7 @@ Open `http://localhost:5173`, choose **Select PDF**, then **Analyze**. Sample PD
 | Variable | Default | Meaning |
 | --- | --- | --- |
 | `VITE_API_BASE_URL` (frontend) | `http://localhost:8000` | Where the frontend finds the backend. |
-| `AXIOMPARSE_CORS_ORIGINS` (backend) | `http://localhost:5173,http://127.0.0.1:5173` | Comma-separated origins allowed to call the API. |
+| `AXIOMPARSE_CORS_ORIGINS` (backend) | `http://localhost:5173,http://127.0.0.1:5173` | Comma-separated origins allowed to call the API. `localhost`/`127.0.0.1` on any port is always allowed. |
 | `AXIOMPARSE_MAX_UPLOAD_MB` (backend) | `50` | Upload size limit. |
 | `AXIOMPARSE_DEMO_CACHE` (backend) | off | Set to `1` to serve pre-computed results for known files. Leave off for real analysis. |
 

@@ -11,3 +11,10 @@ Thumbs.db
 
 # Environment secrets
 .env
+# Node / build output
+node_modules/
+dist/
+
+# Local analysis caches and virtualenvs
+.venv/
+backend/.cache/

@@ -319,6 +319,10 @@ class UniversalIngestionPipeline:
     def _generate_markdown(self, blocks: List[SemanticBlock]) -> str:
         """Assembles blocks into clean GitHub Flavored Markdown (GFM)."""
         md_lines = []
+
+        def cell(value: str) -> str:
+            return str(value).replace("|", "\\|").replace("\n", " ")
+
         for b in blocks:
             if b.type == BlockType.HEADER or b.type == BlockType.FOOTER:
                 # Omit running headers/footers from core markdown reading stream
@@ -332,10 +336,10 @@ class UniversalIngestionPipeline:
                 md_lines.append(f"{b.text}\n")
             elif b.type == BlockType.TABLE and b.table_data:
                 if b.table_data.headers:
-                    md_lines.append("| " + " | ".join(b.table_data.headers) + " |")
+                    md_lines.append("| " + " | ".join(cell(h) for h in b.table_data.headers) + " |")
                     md_lines.append("| " + " | ".join(["---"] * len(b.table_data.headers)) + " |")
                 for r in b.table_data.rows:
-                    md_lines.append("| " + " | ".join(r) + " |")
+                    md_lines.append("| " + " | ".join(cell(c) for c in r) + " |")
                 md_lines.append("\n")
             elif b.type == BlockType.FIGURE:
                 md_lines.append(f"{b.text}\n")
