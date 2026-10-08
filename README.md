@@ -201,22 +201,31 @@ axiom-parser/
 
 ## Technology Stack
 
-The project uses a modular web application structure with technologies and tools organized across the frontend, backend, smart-contract, and testing components.
+## Technology Stack
 
-The root project configuration currently includes:
+### Frontend
 
-* Tailwind CSS
-* Vite integration through `@tailwindcss/vite`
-* JavaScript / Node.js project configuration
-* Smart-contract development components
-* Frontend application components
-* Backend application components
-* Testing components
+- React 19
+- TypeScript
+- Vite 8
+- Tailwind CSS 4
+- React DOM
+- ESLint
 
-Additional technologies may be introduced as the project evolves.
+### Project Structure
 
----
+- Frontend application in `frontend/`
+- Backend components in `backend/`
+- Smart contracts in `contracts/`
+- Testing components in `tests/`
+- Demonstration assets in `demo_assets/`
 
+### Development Tools
+
+- Node.js
+- npm
+- Git
+- GitHub
 ## Screenshots
 
 ### AxiomParse Document Examination Dashboard
@@ -284,17 +293,21 @@ Testing is maintained as a dedicated project area to support reliable developmen
 ---
 
 ## Getting Started
+## Getting Started
 
 ### Prerequisites
 
-Before running the project, ensure the required development tools and dependencies for the frontend, backend, and other project components are installed.
+Make sure the following are installed:
+
+- Node.js
+- npm
+- Git
 
 ### Clone the Repository
 
 ```bash
 git clone https://github.com/shreedevi-s-28/axiom-parser.git
 cd axiom-parser
-```
 
 ### Install Project Dependencies
 
