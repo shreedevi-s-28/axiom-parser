@@ -1,0 +1,198 @@
+{
+  "document_id": "doc_mock_123",
+  "filename": "sample_filing.pdf",
+  "file_type": "application/pdf",
+  "page_count": 1,
+  "metrics": {
+    "processing_time_ms": 840.0,
+    "estimated_cost_usd": 0.00065,
+    "confidence_average": 0.875,
+    "total_pages": 1,
+    "total_blocks": 4
+  },
+  "blocks": [
+    {
+      "id": "blk_001",
+      "page": 1,
+      "type": "heading",
+      "text": "Executive Financial Summary",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 60.0,
+        "x1": 900.0,
+        "y1": 95.0
+      },
+      "confidence": 0.99,
+      "reading_order": 1,
+      "level": 1,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_002",
+      "page": 1,
+      "type": "paragraph",
+      "text": "The following review reflects our consolidated debt obligations and capital structure maturities.",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 100.0,
+        "x1": 900.0,
+        "y1": 130.0
+      },
+      "confidence": 0.98,
+      "reading_order": 2,
+      "level": null,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_003",
+      "page": 1,
+      "type": "table",
+      "text": "Debt Structure Summary",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 135.0,
+        "x1": 900.0,
+        "y1": 205.0
+      },
+      "confidence": 0.95,
+      "reading_order": 3,
+      "level": null,
+      "table_data": {
+        "headers": [
+          "Tranche",
+          "Principal ($M)",
+          "Rate"
+        ],
+        "rows": [
+          [
+            "Term Loan B",
+            "620.0",
+            "SOFR + 2.50%"
+          ],
+          [
+            "Senior Notes",
+            "400.0",
+            "5.875%"
+          ]
+        ],
+        "cells": [
+          {
+            "row": 0,
+            "col": 0,
+            "text": "Term Loan B",
+            "rowspan": 1,
+            "colspan": 1,
+            "bbox": {
+              "x0": 54.0,
+              "y0": 140.0,
+              "x1": 300.0,
+              "y1": 165.0
+            }
+          },
+          {
+            "row": 0,
+            "col": 1,
+            "text": "620.0",
+            "rowspan": 1,
+            "colspan": 1,
+            "bbox": {
+              "x0": 310.0,
+              "y0": 140.0,
+              "x1": 500.0,
+              "y1": 165.0
+            }
+          },
+          {
+            "row": 0,
+            "col": 2,
+            "text": "SOFR + 2.50%",
+            "rowspan": 1,
+            "colspan": 1,
+            "bbox": {
+              "x0": 510.0,
+              "y0": 140.0,
+              "x1": 900.0,
+              "y1": 165.0
+            }
+          },
+          {
+            "row": 1,
+            "col": 0,
+            "text": "Senior Notes",
+            "rowspan": 1,
+            "colspan": 1,
+            "bbox": {
+              "x0": 54.0,
+              "y0": 170.0,
+              "x1": 300.0,
+              "y1": 195.0
+            }
+          },
+          {
+            "row": 1,
+            "col": 1,
+            "text": "400.0",
+            "rowspan": 1,
+            "colspan": 1,
+            "bbox": {
+              "x0": 310.0,
+              "y0": 170.0,
+              "x1": 500.0,
+              "y1": 195.0
+            }
+          },
+          {
+            "row": 1,
+            "col": 2,
+            "text": "5.875%",
+            "rowspan": 1,
+            "colspan": 1,
+            "bbox": {
+              "x0": 510.0,
+              "y0": 170.0,
+              "x1": 900.0,
+              "y1": 195.0
+            }
+          }
+        ],
+        "is_multi_page": false,
+        "continued_pages": [
+          1
+        ]
+      },
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null
+    },
+    {
+      "id": "blk_004",
+      "page": 1,
+      "type": "paragraph",
+      "text": "* Note 4: Excludes $12.5M deferred financing costs amortized over facility tenure.",
+      "bbox": {
+        "x0": 54.0,
+        "y0": 900.0,
+        "x1": 900.0,
+        "y1": 935.0
+      },
+      "confidence": 0.58,
+      "reading_order": 4,
+      "level": null,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": true,
+      "review_reason": "Degraded ink contrast: OCR confidence below 0.70 threshold"
+    }
+  ],
+  "markdown": "# Executive Financial Summary\n\nThe following review reflects our consolidated debt obligations and capital structure maturities.\n\n| Tranche | Principal ($M) | Rate |\n| --- | --- | --- |\n| Term Loan B | 620.0 | SOFR + 2.50% |\n| Senior Notes | 400.0 | 5.875% |\n\n* Note 4: Excludes $12.5M deferred financing costs amortized over facility tenure."
+}
