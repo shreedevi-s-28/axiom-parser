@@ -1,0 +1,188 @@
+{
+  "document_id": "doc_cee8a50a",
+  "filename": "math_symbols.pdf",
+  "file_type": "application/octet-stream",
+  "page_count": 1,
+  "pages": [
+    {
+      "page": 1,
+      "width": 612.0,
+      "height": 792.0,
+      "is_scanned": false,
+      "rotation": 0
+    }
+  ],
+  "metrics": {
+    "processing_time_ms": 59.58,
+    "estimated_cost_usd": 0.00065,
+    "confidence_average": null,
+    "total_pages": 1,
+    "total_blocks": 7
+  },
+  "blocks": [
+    {
+      "id": "p1_b0_l0",
+      "page": 1,
+      "type": "header",
+      "text": "Mathematical Symbols Stress Test",
+      "bbox": {
+        "x0": 258.1,
+        "y0": 96.9,
+        "x1": 741.9,
+        "y1": 128.2
+      },
+      "confidence": null,
+      "reading_order": 1,
+      "level": null,
+      "font_size": 18.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "p1_b1_l0",
+      "page": 1,
+      "type": "paragraph",
+      "text": "\u03c3 \u2264 10",
+      "bbox": {
+        "x0": 127.5,
+        "y0": 158.1,
+        "x1": 173.5,
+        "y1": 175.5
+      },
+      "confidence": null,
+      "reading_order": 2,
+      "level": null,
+      "font_size": 10.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "p1_b2_l0",
+      "page": 1,
+      "type": "paragraph",
+      "text": "x\u00b2 + y\u00b2 = z\u00b2",
+      "bbox": {
+        "x0": 127.5,
+        "y0": 192.2,
+        "x1": 205.5,
+        "y1": 209.6
+      },
+      "confidence": null,
+      "reading_order": 3,
+      "level": null,
+      "font_size": 10.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "p1_b3_l0",
+      "page": 1,
+      "type": "paragraph",
+      "text": "\u2211 xI = n\u00b5",
+      "bbox": {
+        "x0": 127.5,
+        "y0": 226.3,
+        "x1": 201.4,
+        "y1": 243.7
+      },
+      "confidence": null,
+      "reading_order": 4,
+      "level": null,
+      "font_size": 10.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "p1_b4_l0",
+      "page": 1,
+      "type": "paragraph",
+      "text": "\u222b f(x) dx",
+      "bbox": {
+        "x0": 127.5,
+        "y0": 260.4,
+        "x1": 181.9,
+        "y1": 277.8
+      },
+      "confidence": null,
+      "reading_order": 5,
+      "level": null,
+      "font_size": 10.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "p1_b5_l0",
+      "page": 1,
+      "type": "paragraph",
+      "text": "\u221a(x\u00b2 + y\u00b2)",
+      "bbox": {
+        "x0": 127.5,
+        "y0": 294.5,
+        "x1": 193.2,
+        "y1": 311.9
+      },
+      "confidence": null,
+      "reading_order": 6,
+      "level": null,
+      "font_size": 10.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    },
+    {
+      "id": "p1_b6_l0",
+      "page": 1,
+      "type": "paragraph",
+      "text": "\u03b1 + \u03b2 \u2260 \u03b3",
+      "bbox": {
+        "x0": 127.5,
+        "y0": 328.6,
+        "x1": 190.1,
+        "y1": 345.9
+      },
+      "confidence": null,
+      "reading_order": 7,
+      "level": null,
+      "font_size": 10.0,
+      "table_data": null,
+      "chart_data": null,
+      "latex": null,
+      "flagged_for_review": false,
+      "review_reason": null,
+      "asset_path": null,
+      "metadata": {}
+    }
+  ],
+  "markdown": "\u03c3 \u2264 10\n\nx\u00b2 + y\u00b2 = z\u00b2\n\n\u2211 xI = n\u00b5\n\n\u222b f(x) dx\n\n\u221a(x\u00b2 + y\u00b2)\n\n\u03b1 + \u03b2 \u2260 \u03b3\n",
+  "status": "success",
+  "warnings": []
+}
