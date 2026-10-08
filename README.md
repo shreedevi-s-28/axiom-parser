@@ -1,174 +1,378 @@
-# AxiomParse Architecture
+# AxiomParse
 
-## 1. Overview
+> **DOCUMENT EXAMINATION WORKBENCH**
 
-AxiomParse follows a modular architecture that separates the user interface, backend processing, parsing logic, smart-contract components, and testing infrastructure.
+AxiomParse is a modular document examination and processing system designed to transform input documents into structured, reviewable information.
 
-The architecture is designed to keep individual components maintainable while allowing the system to be extended with additional processing capabilities and integrations.
+The project is organized into separate frontend, backend, parsing and processing, smart-contract, testing, and supporting asset components.
 
 ---
 
-## 2. High-Level Architecture
+## Overview
+
+AxiomParse provides an interface for examining processed document content and presenting extracted information in a structured format.
+
+The system is designed around a modular architecture so that individual components can be developed, tested, and extended independently.
+
+Key areas of the project include:
+
+- Document examination and processing
+- Structured extraction of document content
+- Frontend-based result visualization
+- Backend application processing
+- Smart-contract components
+- Automated testing infrastructure
+- Demonstration and supporting assets
+
+---
+
+## Problem Statement
+
+Processing documents manually can make it difficult to identify, organize, and review different types of content efficiently.
+
+AxiomParse aims to provide a structured application environment where document information can be processed and presented as identifiable blocks such as headings, paragraphs, tables, and other extracted content.
+
+The system is designed to improve organization, reviewability, and extensibility of document-processing workflows.
+
+---
+
+## Objectives
+
+The main objectives of AxiomParse are:
+
+- Provide a structured document examination interface.
+- Process input documents into organized content.
+- Present extracted information in a clear format.
+- Support review and inspection of processed content.
+- Maintain separate frontend and backend components.
+- Provide a dedicated location for smart-contract functionality.
+- Maintain a testing structure for reliable development.
+- Keep the system modular and extensible.
+
+---
+
+## Key Features
+
+### Document Examination
+
+AxiomParse provides a document examination interface for viewing processed document information.
+
+### Structured Extraction
+
+Processed document content can be represented as structured blocks such as:
+
+- Headings
+- Paragraphs
+- Tables
+- Other document elements
+
+### Confidence and Processing Information
+
+The interface can present processing-related information such as extraction confidence, processing status, pages processed, processing time, and estimated processing information.
+
+### Block Inspection
+
+Individual extracted blocks can be inspected to support document review and verification.
+
+### Modular Architecture
+
+The repository separates the major components into:
+
+- Frontend
+- Backend
+- Processing
+- Smart contracts
+- Tests
+- Demo assets
+
+### Smart-Contract Components
+
+Blockchain-related components are maintained separately inside the `contracts/` directory.
+
+---
+
+## System Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │        User         │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │      Frontend       │
-                    │   User Interface    │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │       Backend       │
-                    │ Processing & Logic  │
-                    └──────────┬──────────┘
-                               │
-                ┌──────────────┴──────────────┐
-                │                             │
-                ▼                             ▼
-      ┌───────────────────┐       ┌───────────────────┐
-      │ Parsing / Data    │       │ Smart Contracts   │
-      │ Processing        │       │ Components        │
-      └─────────┬─────────┘       └─────────┬─────────┘
-                │                           │
-                └──────────────┬────────────┘
-                               ▼
-                    ┌─────────────────────┐
-                    │  Processed Results  │
-                    └─────────────────────┘
+                         ┌──────────────────────┐
+                         │        User          │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │      Frontend        │
+                         │   User Interface     │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │       Backend        │
+                         │ Application Logic    │
+                         │   & Processing       │
+                         └──────────┬───────────┘
+                                    │
+                         ┌──────────┴───────────┐
+                         │                      │
+                         ▼                      ▼
+              ┌──────────────────┐   ┌──────────────────┐
+              │ Parsing & Data   │   │ Smart Contracts  │
+              │ Processing       │   │ / Blockchain     │
+              └────────┬─────────┘   └────────┬─────────┘
+                       │                      │
+                       └──────────┬───────────┘
+                                  ▼
+                         ┌──────────────────────┐
+                         │   Processed Output   │
+                         └──────────┬───────────┘
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │      Frontend        │
+                         │  Results / Review    │
+                         └──────────────────────┘
 ```
 
----
-
-## 3. System Components
-
-### Frontend
-
-The `frontend/` directory contains the user-facing application.
-
-Its responsibilities include:
-
-* Providing the application interface.
-* Accepting user input.
-* Displaying processing results.
-* Communicating with backend services where required.
-
-### Backend
-
-The `backend/` directory contains the server-side application and processing logic.
-
-Its responsibilities include:
-
-* Receiving and processing application requests.
-* Coordinating parsing and processing operations.
-* Handling application-level logic.
-* Returning processed results to the frontend.
-
-### Parsing and Processing
-
-The parsing and processing layer is responsible for transforming input data into a structured form that can be processed by the application.
-
-This layer is intended to remain modular so that additional parsing strategies and input formats can be introduced in future versions.
-
-### Smart Contracts
-
-The `contracts/` directory contains the project's smart-contract components.
-
-These components provide the foundation for blockchain-related functionality and can be integrated with the application's processing workflow where required.
-
-### Testing
-
-The `tests/` directory contains automated tests used to validate system components and functionality.
-
-Testing is intended to support reliable development as additional features are introduced.
+The architecture follows a separation-of-concerns approach in which the frontend, backend, processing logic, smart contracts, and tests are maintained as distinct project areas.
 
 ---
 
-## 4. Application Workflow
-
-The general application workflow is:
+## Application Workflow
 
 ```text
-User Input
-    │
-    ▼
+User
+ │
+ ▼
 Frontend
-    │
-    ▼
+ │
+ │ Input / Document
+ ▼
 Backend
-    │
-    ▼
-Parsing / Processing
-    │
-    ├──────────────► Smart Contract Components
-    │
-    ▼
-Processed Data
-    │
-    ▼
-Frontend Output
+ │
+ ▼
+Parsing & Processing
+ │
+ ├──────────────► Smart Contract Layer
+ │
+ ▼
+Structured / Processed Results
+ │
+ ▼
+Frontend
+ │
+ ▼
+User Review / Output
 ```
 
-The architecture allows individual stages to be modified or extended without requiring the entire application to be redesigned.
+The frontend provides the primary interaction layer, while the backend coordinates application-level processing.
+
+The processing layer transforms input into structured information that can be presented to the user.
 
 ---
 
-## 5. Repository Organization
+## Repository Structure
 
 ```text
-axiomparse/
+axiom-parser/
 │
 ├── backend/
-│   └── Backend application and processing logic
+│   └── Backend application and processing components
 │
 ├── contracts/
 │   └── Smart-contract components
+│
+├── demo_assets/
+│   └── Demonstration and supporting assets
 │
 ├── frontend/
 │   └── Frontend application
 │
 ├── tests/
-│   └── Automated tests
+│   └── Testing components
 │
 ├── .gitignore
-└── README.md
+├── README.md
+├── axiom_parser.jpg
+├── generate_assets.py
+├── package.json
+└── package-lock.json
 ```
 
-Additional directories and configuration files may be introduced as the project evolves.
+---
+
+## Technology Stack
+
+The project uses a modular web application structure with technologies and tools organized across the frontend, backend, smart-contract, and testing components.
+
+The root project configuration currently includes:
+
+* Tailwind CSS
+* Vite integration through `@tailwindcss/vite`
+* JavaScript / Node.js project configuration
+* Smart-contract development components
+* Frontend application components
+* Backend application components
+* Testing components
+
+Additional technologies may be introduced as the project evolves.
 
 ---
 
-## 6. Design Principles
+## Screenshots
 
-AxiomParse is developed around the following principles:
+### AxiomParse Document Examination Dashboard
 
-* **Modularity** — major system components are separated into independent areas.
-* **Maintainability** — components are organized to simplify future development.
-* **Extensibility** — the architecture allows additional processing capabilities to be introduced.
-* **Testability** — automated testing is maintained as part of the project structure.
-* **Separation of Concerns** — frontend, backend, processing, smart contracts, and testing have distinct responsibilities.
+![AxiomParse Dashboard](axiom_parser.jpg)
+
+The dashboard provides a document examination workspace with extracted blocks, processing information, confidence values, and review-related functionality.
 
 ---
 
-## 7. Future Architectural Extensions
+## Project Components
+
+### Frontend
+
+The `frontend/` directory contains the user-facing application.
+
+It provides the interface through which users interact with AxiomParse and view processed document information.
+
+### Backend
+
+The `backend/` directory contains server-side application components and processing logic.
+
+### Contracts
+
+The `contracts/` directory contains smart-contract components associated with the project.
+
+### Tests
+
+The `tests/` directory contains testing-related project components.
+
+### Demo Assets
+
+The `demo_assets/` directory contains supporting assets used for demonstration and development.
+
+### Asset Generation
+
+The `generate_assets.py` script is used to generate supporting project assets.
+
+---
+
+## Design Principles
+
+AxiomParse follows these architectural principles:
+
+### Modularity
+
+Major components are maintained in separate directories to simplify development and maintenance.
+
+### Separation of Concerns
+
+Frontend, backend, processing, smart-contract, and testing responsibilities are kept as distinct project areas.
+
+### Maintainability
+
+The repository structure makes individual components easier to locate, modify, and extend.
+
+### Extensibility
+
+The architecture allows additional document-processing capabilities, input formats, integrations, and application features to be introduced over time.
+
+### Testability
+
+Testing is maintained as a dedicated project area to support reliable development.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Before running the project, ensure the required development tools and dependencies for the frontend, backend, and other project components are installed.
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/shreedevi-s-28/axiom-parser.git
+cd axiom-parser
+```
+
+### Install Project Dependencies
+
+```bash
+npm install
+```
+
+Additional dependencies may be required for individual components located inside the `frontend/`, `backend/`, `contracts/`, or `tests/` directories.
+
+Refer to the respective component configuration files for component-specific setup.
+
+---
+
+## Development
+
+AxiomParse is organized to allow different project components to be developed independently.
+
+Typical development areas include:
+
+* Frontend interface development
+* Backend processing
+* Document parsing and extraction
+* Smart-contract development
+* Automated testing
+* Demo asset generation
+
+As the project evolves, component-specific development instructions can be added to this documentation.
+
+---
+
+## Testing
+
+Testing resources are maintained in the `tests/` directory.
+
+The testing structure can be expanded as additional frontend, backend, processing, and smart-contract functionality is implemented.
+
+---
+
+## Future Scope
 
 Potential future improvements include:
 
-* Additional parsing and processing modules.
-* Support for additional input formats.
-* More extensive frontend visualization.
-* Improved backend validation and error handling.
+* Support for additional document formats.
+* Improved document parsing and extraction.
+* Advanced document analysis.
+* Enhanced frontend visualization.
+* Improved review and verification workflows.
+* Additional backend validation.
 * Expanded smart-contract integration.
 * Increased automated test coverage.
 * Performance and scalability improvements.
-* Deployment of individual services using production infrastructure.
+* Production deployment.
+* Monitoring and logging capabilities.
 
 ---
 
-## 8. Architecture Status
+## Project Status
 
-The architecture described in this document represents the current modular organization of the project and may evolve as additional functionality is implemented.
+AxiomParse is an actively developed project.
+
+The architecture and functionality may evolve as additional processing capabilities, integrations, testing, and deployment features are implemented.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Repository
+
+GitHub: [https://github.com/shreedevi-s-28/axiom-parser](https://github.com/shreedevi-s-28/axiom-parser)
+
+---
+
+## Author
+
+**Shree Devi S**
+
+GitHub: [https://github.com/shreedevi-s-28](https://github.com/shreedevi-s-28)
