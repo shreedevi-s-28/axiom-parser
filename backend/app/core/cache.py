@@ -5,6 +5,9 @@ import hashlib
 from typing import Optional
 from app.schemas.document import ParseResult
 
+# Bump when extraction logic changes so stale results are never served.
+CACHE_VERSION = "2"
+
 CACHE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".cache", "provenance"))
 
 class ProvenanceCache:
@@ -20,7 +23,7 @@ class ProvenanceCache:
 
     def get(self, content: bytes, filename: str) -> Optional[dict]:
         file_hash = self.get_hash(content)
-        cache_file = os.path.join(CACHE_DIR, f"{file_hash}.json")
+        cache_file = os.path.join(CACHE_DIR, f"v{CACHE_VERSION}_{file_hash}.json")
         
         # Check by content hash
         if os.path.exists(cache_file):
@@ -28,7 +31,7 @@ class ProvenanceCache:
                 return json.load(f)
         
         # Secondary check: Check by demo filename alias
-        alias_file = os.path.join(CACHE_DIR, f"{filename}.json")
+        alias_file = os.path.join(CACHE_DIR, f"v{CACHE_VERSION}_{os.path.basename(filename)}.json")
         if os.path.exists(alias_file):
             with open(alias_file, "r") as f:
                 return json.load(f)
@@ -37,7 +40,7 @@ class ProvenanceCache:
 
     def set(self, content: bytes, filename: str, result_dict: dict) -> None:
         file_hash = self.get_hash(content)
-        cache_file = os.path.join(CACHE_DIR, f"{file_hash}.json")
+        cache_file = os.path.join(CACHE_DIR, f"v{CACHE_VERSION}_{file_hash}.json")
         with open(cache_file, "w") as f:
             json.dump(result_dict, f, indent=2)
 

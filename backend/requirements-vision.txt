@@ -1,0 +1,4 @@
+# Optional: enables vision-model chart extraction when OPENAI_API_KEY is set.
+# Without it, vector charts are still read exactly and other charts are flagged.
+-r requirements.txt
+openai>=1.30

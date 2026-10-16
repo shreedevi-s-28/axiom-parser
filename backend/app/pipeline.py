@@ -156,7 +156,13 @@ class UniversalIngestionPipeline:
                             b_type = BlockType.PARAGRAPH
                             lvl = None
 
-                        bbox_list = s.get("bbox", [0.0, 0.0, 1000.0, 50.0])
+                        # Clamp to the schema's 0..1000 range: PyMuPDF can report lines a few
+                        # points past the page edge, which previously failed validation and
+                        # silently replaced the whole document with the demo fixture.
+                        bbox_list = [
+                            min(max(float(v), 0.0), 1000.0)
+                            for v in s.get("bbox", [0.0, 0.0, 1000.0, 50.0])
+                        ]
                         blocks.append(
                             SemanticBlock(
                                 id=s.get("id", f"blk_{uuid.uuid4().hex[:6]}"),

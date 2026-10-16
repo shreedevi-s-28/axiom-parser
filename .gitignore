@@ -11,3 +11,11 @@ Thumbs.db
 
 # Environment secrets
 .env
+
+# Generated provenance cache (rebuilt on demand)
+backend/.cache/
+
+# Local environment
+.venv/
+node_modules/
+frontend/dist/
