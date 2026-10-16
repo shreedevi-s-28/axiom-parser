@@ -1,7 +1,7 @@
 import os
 import json
 import base64
-from typing import Dict, Any
+from typing import Any, Dict, Optional, Tuple
 
 
 def get_fallback_chart_data() -> Dict[str, Any]:
@@ -24,7 +24,15 @@ def get_fallback_chart_data() -> Dict[str, Any]:
     }
 
 
+def _is_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
 def validate_chart_data(data: Dict[str, Any]) -> bool:
+    """True only if `data` can be loaded into the ChartData schema."""
+    if not isinstance(data, dict):
+        return False
+
     required_keys = ["chart_type", "title", "series"]
 
     if not all(key in data for key in required_keys):
@@ -34,14 +42,18 @@ def validate_chart_data(data: Dict[str, Any]) -> bool:
         return False
 
     for series in data["series"]:
-        if "name" not in series or "data" not in series:
+        if not isinstance(series, dict) or "name" not in series or "data" not in series:
             return False
 
         if not isinstance(series["data"], list):
             return False
 
         for point in series["data"]:
-            if "x" not in point or "y" not in point:
+            if not isinstance(point, dict) or "x" not in point or "y" not in point:
+                return False
+            if not _is_number(point["y"]):
+                return False
+            if not (isinstance(point["x"], str) or _is_number(point["x"])):
                 return False
 
     return True
@@ -83,16 +95,18 @@ def chart_to_markdown_table(chart_data: Dict[str, Any]) -> str:
     return markdown
 
 
-def parse_chart_region(image_bytes: bytes) -> Dict[str, Any]:
+def extract_chart(image_bytes: bytes) -> Tuple[Optional[Dict[str, Any]], str]:
+    """Vision extraction. Returns (data, source) with source 'vision' or 'fallback'.
+    data is the canned golden chart only when source == 'fallback'."""
     api_key = os.getenv("OPENAI_API_KEY")
 
     if not api_key or not image_bytes:
-        return get_fallback_chart_data()
+        return get_fallback_chart_data(), "fallback"
 
     try:
         from openai import OpenAI
 
-        client = OpenAI(api_key=api_key)
+        client = OpenAI(api_key=api_key, timeout=20.0, max_retries=0)
 
         base64_image = base64.b64encode(image_bytes).decode("utf-8")
 
@@ -154,9 +168,15 @@ Rules:
         chart_data = json.loads(raw)
 
         if not validate_chart_data(chart_data):
-            return get_fallback_chart_data()
+            return get_fallback_chart_data(), "fallback"
 
-        return chart_data
+        return chart_data, "vision"
 
     except Exception:
-        return get_fallback_chart_data()
+        return get_fallback_chart_data(), "fallback"
+
+
+def parse_chart_region(image_bytes: bytes) -> Dict[str, Any]:
+    """Backward-compatible wrapper: always returns a valid chart dict."""
+    data, _source = extract_chart(image_bytes)
+    return data
