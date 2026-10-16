@@ -1,4 +1,5 @@
 # backend/app/pipeline.py
+import asyncio
 import io
 import time
 import uuid
@@ -52,7 +53,11 @@ class UniversalIngestionPipeline:
         # ==========================================
         # STAGE 2: EXTRACT & ASSEMBLE (Person 2 & 3 Hooks)
         # ==========================================
-        assembled_blocks = self._stage2_extract_and_assemble(raw_blocks)
+        # Runs in a worker thread so the 45s watchdog can still fire if PyMuPDF
+        # or a vision-model call blocks.
+        assembled_blocks = await asyncio.to_thread(
+            self._stage2_extract_and_assemble, raw_blocks, filename, content
+        )
 
         # ==========================================
         # STAGE 3: FLAG & DELIVER
@@ -188,9 +193,17 @@ class UniversalIngestionPipeline:
         # Baseline Fallback Blocks (Demo Reference)
         return self._generate_baseline_blocks()
 
-    def _stage2_extract_and_assemble(self, blocks: List[SemanticBlock]) -> List[SemanticBlock]:
-        """Integration hook for Person 2 (Spatial/Layout) & Person 3 (Chart/Math)."""
-        return blocks
+    def _stage2_extract_and_assemble(self, blocks: List[SemanticBlock], filename: str, content: bytes) -> List[SemanticBlock]:
+        """Person 3: tables, charts and equations (see extractors/stage2_adapter.py).
+        Failure here must never fail the request, so Stage 1 blocks are the fallback."""
+        if not filename.lower().endswith(".pdf"):
+            return blocks
+        try:
+            from app.extractors.stage2_adapter import enrich_blocks
+            return enrich_blocks(blocks, content)
+        except Exception as e:
+            print(f"[Warning] Stage 2 enrichment failed ({e}); returning Stage 1 blocks.")
+            return blocks
 
     def _stage3_flag_and_deliver(self, blocks: List[SemanticBlock]) -> Tuple[List[SemanticBlock], float]:
         """Calibrates confidence scores and tags ambiguous blocks for diligence audit."""
